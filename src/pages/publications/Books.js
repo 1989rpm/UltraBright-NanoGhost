@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from "axios";
 import bgrnd from '../../assets/backs.png'
+import axiosInstance from '../../api/axios';
+import Pagination from '../../components/Pagination';
 
 function Books() 
 {
@@ -30,19 +31,6 @@ function Books()
     // ];
 //------------------------------SAMPLE---DATA--------------------------------------------------------------------------
 
-    const [books, setBooks] = useState([]);
-    const [bookChapters, setBookChapters] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/books/')
-        .then(res => setBooks(res.data))
-        .catch(err => console.error("Error fetching Lab Head", err));
-
-        axios.get('http://127.0.0.1:8000/api/book-chapters/')
-        .then(res => setBookChapters(res.data))
-        .catch(err => console.error("Error fetching members", err));
-    }, []);
-
     return( 
         <div>
             <div className="relative h-[300px] sm:h-[300px] overflow-hidden">
@@ -58,35 +46,92 @@ function Books()
             </div>    
             <div className="px-6 py-16 max-w-6xl mx-auto text-gray-900"> 
                 {/* Books Section */}
-                <div className="mb-16">
-                    <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Books</h2>
-                    <div className="space-y-6">
-                    {books.map(book => (
-                        <div
-                        key={book.id}
-                        className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
-                        >
-                        <p className="text-lg text-gray-800">{book.description}</p>
-                        </div>
-                    ))}
-                    </div>
-                </div>
+                    <Book/>
 
                 {/* Book Chapters Section */}
-                <div>
-                    <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Book Chapters</h2>
-                    <div className="space-y-6">
-                        {bookChapters.map(chapter => (
-                            <div
-                            key={chapter.id}
-                            className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
-                            >
-                                <p className="text-lg text-gray-800">{chapter.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                    <Chapters/>
             </div>
+        </div>
+    );
+}
+
+function Book()
+{
+    const [books, setBooks] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const itemsPerPage = 20; // adjust as needed
+
+    useEffect(() => {
+        axiosInstance.get(`books/?page=${currentPage}`)
+        .then(res => {
+            setBooks(res.data.results || []);
+            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+        })
+        .catch(err => console.error("Error fetching Lab Head", err));
+    }, [currentPage]);
+
+    return(
+        <div className="mb-16">
+            <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Books</h2>
+            <div className="space-y-6">
+            {books.map(book => (
+                <div
+                key={book.id}
+                className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
+                >
+                <p className="text-lg text-gray-800">{book.description}</p>
+                </div>
+            ))}
+            </div>
+
+            {/* Pagination */}
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
+
+        </div>
+    );
+}
+
+function Chapters()
+{
+    const [bookChapters, setBookChapters] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const itemsPerPage = 20; // adjust as needed
+
+    useEffect(() => {
+        axiosInstance.get(`book-chapters/?page=${currentPage}`)
+        .then(res => {
+            setBookChapters(res.data.results || []);
+            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+        })
+        .catch(err => console.error("Error fetching members", err));
+    }, [currentPage]);
+    
+    return(
+        <div>
+            <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Book Chapters</h2>
+            <div className="space-y-6">
+                {bookChapters.map(chapter => (
+                    <div
+                    key={chapter.id}
+                    className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
+                    >
+                        <p className="text-lg text-gray-800">{chapter.description}</p>
+                    </div>
+                ))}
+            </div>
+
+            {/* Pagination */}
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
         </div>
     );
 }

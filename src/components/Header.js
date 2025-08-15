@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo2.png';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,9 +17,9 @@ function Header() {
         <div className="flex items-center">
           <img src={logo} alt="MINT Logo" className="h-20 sm:h-24 md:h-[110px]" />
           <div className="leading-tight ml-2">
-            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Molecular Imaging</h1>
-            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Nano Theranostics</h1>
-            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Lab</h1>
+            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Bright NanoGhost</h1>
+            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Group</h1>
+            {/* <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Lab</h1> */}
           </div>
         </div>
 
@@ -59,8 +59,8 @@ function Header() {
           <NavLink to="/research" className={navLinkClass}>Research</NavLink>
           <NavLink to="/members" className={navLinkClass}>Members</NavLink>
           <div className="relative group">
-            <button className="hover:text-purple-900 px-3 py-2">Publications▾</button>
-            <div className="absolute hidden group-hover:block bg-white shadow-md top-10 left-0 z-10 w-52">
+            <button className="hover:text-purple-900 px-3 pt-2">Publications▾</button>
+            <div className="absolute hidden group-hover:block bg-white shadow-md left-0 z-10 w-52">
               <NavLink to="/publications/journals" className={navLinkClass}>Journal Articles</NavLink>
               <NavLink to="/publications/books" className={navLinkClass}>Books & Chapters</NavLink>
             </div>

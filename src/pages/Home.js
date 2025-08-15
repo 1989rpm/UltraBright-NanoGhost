@@ -1,6 +1,7 @@
 import NewsSlider from '../components/NewsSlider';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import homeBackground from '../assets/home_background.jpg';
+//import homeBackground from '../assets/home_background.jpg';
+import homeVideo from '../assets/home_video.mp4';
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -16,9 +17,19 @@ function Home() {
       {/* Hero Section */}
       <div className="relative h-screen overflow-hidden">
         {/*---------------------------------------- Zoomable Background Image-----------------------------------------*/}
-        <motion.div
+        {/* <motion.div
           className="will-change-transform absolute top-0 left-0 w-full h-full bg-center bg-cover z-0"
           style={{ scale, y, backgroundImage: `url(${homeBackground})` }}
+        /> */}
+
+        <motion.video
+          className="will-change-transform absolute top-0 left-0 w-full h-full object-cover z-0"
+          style={{ scale, y }}
+          src={homeVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
         />
 
         {/*------------------------------------------ Overlay & Text ----------------------------------------------- */}

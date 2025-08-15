@@ -10,7 +10,7 @@ import Position from './pages/Position';
 import Journals from './pages/publications/Journals';
 import Books from './pages/publications/Books';
 //import News from './pages/others/News';
-//import LabTour from './pages/others/LabTour';
+import NotFound from './pages/NotFound';
 import Gallery from './pages/Gallery';
 //import Conferences from './pages/others/Conferences';
 //import GroupFun from './pages/others/GroupFun';
@@ -40,6 +40,7 @@ function App() {
             <Route path="/others/group-fun" element={<GroupFun />} />
 */}
             <Route path="/position" element={<Position />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

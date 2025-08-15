@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FaLinkedin, FaXTwitter, FaEnvelope, FaGoogleScholar } from 'react-icons/fa6';
 //import { AiFillOrcid } from "react-icons/ai";
 //import labHeadImage from '../assets/members/rpm.jpg';
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
 //import labimg from '../assets/grpimage.png'
 
@@ -70,16 +70,16 @@ function Members() {
   const [alumni, setAlumni] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/members/lab-head/')
+    axiosInstance.get('members/lab-head/')
       .then(res => setLabHead(res.data))
       .catch(err => console.error("Error fetching Lab Head", err));
 
-    axios.get('http://127.0.0.1:8000/api/members/lab-members/')
+    axiosInstance.get('members/lab-members/')
       .then(res => setCurrentMembers(res.data))
       .catch(err => console.error("Error fetching members", err));
 
-    axios
-      .get("http://127.0.0.1:8000/api/members/alumni/")
+    axiosInstance
+      .get("members/alumni/")
       .then((res) => setAlumni(res.data))
       .catch((err) => console.error("Error fetching alumni", err));
   }, []);

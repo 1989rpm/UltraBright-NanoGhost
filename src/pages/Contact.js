@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FaLinkedin, FaXTwitter } from 'react-icons/fa6';
 import bgrnd from '../assets/backs.png'
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 
 function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '',message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
@@ -14,9 +14,9 @@ function Contact() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const { name, email, message } = formData;
+    const { name, email, subject, message } = formData;
 
-    if (!name || !email || !message) {
+    if (!name || !email || !subject || !message) {
       setError('Please fill in all fields.');
       return;
     }
@@ -24,9 +24,9 @@ function Contact() {
     try {
       setError('');
       // Send form data to backend
-      await axios.post('http://localhost:8000/api/contact', formData);
+      await axiosInstance.post('contact/', formData);
       setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '' });
     }   
     catch (err) {
       console.error(err);
@@ -85,6 +85,14 @@ function Contact() {
                   onChange={handleChange}
                   className="w-full border-b border-gray-400 py-2 px-1 bg-transparent focus:outline-none"
                 />
+                <textarea
+                  name="subject"
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full border-b border-gray-400 py-2 px-1 bg-transparent focus:outline-none resize-none"
+                  rows="1"
+                ></textarea>
                 <textarea
                   name="message"
                   placeholder="Message"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from "axios";
+import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
+import Pagination from '../components/Pagination';
 
 function Patents() 
 {
@@ -30,18 +31,6 @@ function Patents()
     // ];
 //------------------------------SAMPLE---DATA--------------------------------------------------------------------------
 
-    const [Patent, setPatent] = useState([]);
-    const [Trade_Marks, setTrade_Marks] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/patents/')
-        .then(res => setPatent(res.data))
-        .catch(err => console.error("Error fetching Lab Head", err));
-
-        axios.get('http://127.0.0.1:8000/api/trade-marks/')
-        .then(res => setTrade_Marks(res.data))
-        .catch(err => console.error("Error fetching members", err));
-    }, []);
     
     return( 
         <div>
@@ -58,36 +47,92 @@ function Patents()
             </div>   
             <div className="px-6 py-16 max-w-6xl mx-auto text-gray-900">         
                 {/* Patents Section */}
-                <div className="mb-16">
-                    <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">National and International Patents</h2>
-                    <div className="space-y-6">
-                    {Patent.map(Patent => (
-                        <div
-                        key={Patent.id}
-                        className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
-                        >
-                        <p className="text-lg text-gray-800">{Patent.description}</p>
-                        </div>
-                    ))}
-                    </div>
-                </div>
+                    <Patent/>
 
                 {/* Trade Marks Section */}
-                <div>
-                    <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Trade Marks</h2>
-                    <div className="space-y-6">
-                        {Trade_Marks.map(Trade_Marks => (
-                            <div
-                            key={Trade_Marks.id}
-                            className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
-                            >
-                                <p className="text-lg text-gray-800">{Trade_Marks.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                    <TradeMark/>
             </div>
         </div> 
+    );
+}
+
+function Patent()
+{
+    const [Patent, setPatent] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const itemsPerPage = 20; // adjust as needed
+
+    useEffect(() => {
+        axiosInstance.get(`patents/?page=${currentPage}`)
+        .then(res => {
+            setPatent(res.data.results || []);
+            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+        })
+        .catch(err => console.error("Error fetching Lab Head", err));
+    }, [currentPage]);
+
+    return(
+        <div className="mb-16">
+            <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">National and International Patents</h2>
+            <div className="space-y-6">
+            {Patent.map(Patent => (
+                <div
+                key={Patent.id}
+                className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
+                >
+                <p className="text-lg text-gray-800">{Patent.description}</p>
+                </div>
+            ))}
+            </div>
+
+            {/* Pagination */}
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
+        </div>
+    );
+}
+
+function TradeMark()
+{
+    const [Trade_Marks, setTrade_Marks] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const itemsPerPage = 20; // adjust as needed
+
+    useEffect(() => {
+        axiosInstance.get(`trade-marks/?page=${currentPage}`)
+        .then(res => {
+            setTrade_Marks(res.data.results || []);
+            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+        })
+        .catch(err => console.error("Error fetching members", err));
+    }, [currentPage]);
+    
+    return(
+        <div>
+            <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Trade Marks</h2>
+            <div className="space-y-6">
+                {Trade_Marks.map(Trade_Marks => (
+                    <div
+                    key={Trade_Marks.id}
+                    className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
+                    >
+                        <p className="text-lg text-gray-800">{Trade_Marks.description}</p>
+                    </div>
+                ))}
+            </div>
+
+            {/* Pagination */}
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
+        </div>
     );
 }
 

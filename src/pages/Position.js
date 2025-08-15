@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
 
 function Position() {
@@ -8,7 +8,7 @@ function Position() {
   const [positions, setPositions] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/positions/')
+    axiosInstance.get('positions/')
       .then((response) => {
         setPositions(response.data);
       })

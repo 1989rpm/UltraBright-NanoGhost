@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { FaLink } from 'react-icons/fa';
 //import sampleimage from '../../assets/journals/sample.jpg'
-import axios from 'axios';
 import bgrnd from '../../assets/backs.png'
+import axiosInstance from '../../api/axios';
+import Pagination from '../../components/Pagination';
 
 function Journals() 
 { 
@@ -31,21 +32,25 @@ function Journals()
   // ];
 //-------------------Sample backend-like data----------------------------------------- 
 
-  const [metrics, setMetrics] = useState([]);
   const [entries, setEntries] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 20; // adjust as needed
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/journals/metrics/')
-      .then(res => setMetrics(res.data))
-      .catch(err => console.error('Error fetching metrics:', err));
-
-    axios.get('http://127.0.0.1:8000/api/journals/entries/')
-      .then(res => setEntries(res.data))
+    axiosInstance.get(`journals/entries/?page=${currentPage}&search=${encodeURIComponent(searchTerm)}`)
+      .then(res => {
+        setEntries(res.data.results || []);
+        setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+      })
       .catch(err => console.error('Error fetching entries:', err));
-  }, []);
+  }, [currentPage, searchTerm]);
 
-  const filteredEntries = entries.filter(entry => entry.text.toLowerCase().includes(searchTerm.toLowerCase()) );
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // reset page when search changes
+  };
 
   return ( 
     <div>
@@ -63,16 +68,7 @@ function Journals()
 
       <div className="px-6 py-8 max-w-7xl mx-auto text-center text-gray-900"> 
         {/* Metrics Block */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 place-items-center mb-16">
-          {metrics.map((metric) => (
-            <div key={metric.id}>
-              <h2 className="text-4xl font-semibold mb-3 capitalize">{metric.name}</h2>
-              <p className="text-[60px] font-bold bg-gradient-to-r from-purple-400 via-pink-300 to-indigo-300 bg-clip-text text-transparent">
-                {metric.value}
-              </p>
-            </div>
-          ))}
-        </div>
+        <Metrics/>
 
         {/* Search Filter */}
         <div className="mb-12">
@@ -81,13 +77,13 @@ function Journals()
             placeholder="Search journal topics..."
             className="px-4 py-2 w-full md:w-1/2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
           />
         </div>
 
         {/* Journal Entries */}
         <div className="space-y-12">
-          {filteredEntries.map(entry => (
+          {entries.map(entry => (
             <div
               key={entry.id}
               className="bg-gray-50 shadow-md rounded-2xl overflow-hidden flex flex-col md:flex-row items-center md:items-start p-6 transform transition-transform duration-1000 hover:scale-[1.05] hover:shadow-xl"
@@ -113,9 +109,42 @@ function Journals()
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+
       </div>
     </div> 
   ); 
+}
+
+function Metrics()
+{
+  const [metrics, setMetrics] = useState([]);
+
+  useEffect(() => {
+    axiosInstance.get('journals/metrics/')
+    .then(res => setMetrics(res.data))
+    .catch(err => console.error('Error fetching metrics:', err));
+  }, []);
+
+  return(
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 place-items-center mb-16">
+      {metrics.map((metric) => (
+        <div key={metric.id}>
+          <h2 className="text-4xl font-semibold mb-3 capitalize">{metric.name}</h2>
+          <p className="text-[60px] font-bold bg-gradient-to-r from-purple-400 via-pink-300 to-indigo-300 bg-clip-text text-transparent">
+            {metric.value}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default Journals;

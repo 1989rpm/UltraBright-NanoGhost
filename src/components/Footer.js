@@ -12,10 +12,10 @@ function Footer() {
         <div className="md:w-1/2 w-full md:mb-0">
           {/* Lab Name */}
           <Link to="/" className="text-[40px] leading-tight mb-[10px] font-bold hover:text-gray-300 transition block">
-            Ultrabright NanoGhost Group
+            Bright NanoGhost Group
           </Link>
           <p className="text-[20px] leading-tight pb-[10px] text-gray-300">
-            Interventional Theranostics & Multimodal Imaging Research
+            Interventional Theranostics & Multimodal Imaging
           </p>
 
           {/* Social Icons */}
