@@ -4,7 +4,7 @@ import { FaLinkedin, FaXTwitter, FaEnvelope, FaGoogleScholar } from 'react-icons
 //import labHeadImage from '../assets/members/rpm.jpg';
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
-//import labimg from '../assets/grpimage.png'
+import labimg from '../assets/grpimage.jpg'
 
 //---------------------------Dummy----Data-----Use-----when------Backend------Offline----------------------------------------------------------
 // import member1 from '../assets/members/himanshu.jpg';
@@ -48,13 +48,14 @@ function HoverCard({ member }) {
           <div className="flex mt-4 gap-3 text-black">
             {member.linkedin && <a href={member.linkedin}><FaLinkedin size={24} /></a>}
             {member.email && <a href={`mailto:${member.email}`}><FaEnvelope size={24} /></a>}
+            {member.google_scholar && <a href={member.google_scholar}><FaGoogleScholar size={24} /></a>}
             {member.twitter && <a href={member.twitter}><FaXTwitter size={24} /></a>}
           </div>
         </div>
         <div className="text-center sm:text-left">
           <h3 className="text-2xl sm:text-4xl font-semibold text-purple-900">{member.name}</h3>
           <p className="text-lg sm:text-xl text-gray-600">{member.position}</p>
-          <p className="mt-4 text-sm sm:text-base text-justify text-gray-700">
+          <p className="mt-4 text-sm sm:text-base text-justify text-gray-700 whitespace-pre-line">
             {member.description}
           </p>
         </div>
@@ -96,20 +97,20 @@ function Members() {
         <div className="relative z-10 bg-black bg-opacity-30 flex flex-col items-center justify-center h-full text-white px-4">
           <h1 className="font-semibold text-center leading-tight text-[50px] sm:text-[50px] md:text-[60px] lg:text-[70px] xl:text-[70px]">Our Group!</h1>
           <p className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[27px] text-center mt-6 px-4 sm:px-8 md:px-[60px] lg:px-[100px] ">
-            ​Welcome to our research team! We are a group of passionate individuals, dedicated to explore new NanoMedicines and pushing 
-            the boundaries of translational knowledge.
+            Our group is about investigating the unknown! We are a group of passionate individuals, dedicated to explore new NanoMedicines and pushing 
+            the boundaries of translational knowledge
           </p>
         </div>
       </div>
 
       {/*------------------------------------------------------Lab Image---------------------------------------------------- */}
-      {/* <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
+      <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
         <img
           src={labimg}
           alt="Lab Group"
           className="w-full h-auto rounded-xl shadow-lg object-cover"
         />
-      </div> */}
+      </div>
 
       {/* -----------------------------------------------Main Content----------------------------------------------- */}
       <div className="px-4 sm:px-8 md:px-16 lg:px-24 py-10 max-w-7xl mx-auto text-gray-800">
@@ -121,8 +122,11 @@ function Members() {
                 <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                   <img src={labHead[0].image} alt="Lab Head" className="w-full h-full object-cover" />
                 </div>
-                <div className="mt-6 text-center md:text-center text-sm">
+                <div className="mt-10 text-center md:text-center text-sm">
                   <p>Editoral Board</p>
+                  <p className="mt-2 text-lg font-semibold text-purple-700 hover:text-purple-900">
+                    <a href="https://pubs.acs.org/journal/nalefd" target="_blank" rel="noreferrer">NanoLetters</a>
+                  </p>
                   <p className="mt-2 text-lg font-semibold text-purple-700 hover:text-purple-900">
                     <a href="https://www.ntno.org/" target="_blank" rel="noreferrer">Nanotheranostics</a>
                   </p>
@@ -143,7 +147,7 @@ function Members() {
                   {labHead[0].twitter && <a href={labHead[0].twitter}><FaXTwitter size={24} /></a>}
                   {labHead[0].google_scholar && <a href={labHead[0].google_scholar}><FaGoogleScholar size={24} /></a>}
                 </div>
-                <p className="mt-6 text-[15px] sm:text-[15px] md:text-[15px] lg:text-[13px] text-justify text-gray-700">
+                <p className="mt-6 text-[15px] sm:text-[15px] md:text-[15px] lg:text-[15px] text-justify text-gray-700 whitespace-pre-line">
                   {labHead[0].description}
                 </p>
               </div>

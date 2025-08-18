@@ -77,7 +77,7 @@ function LabPhoto()
   }, [currentPage]);
   
   return(
-    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 bg-gradient-to-b from-slate-50 via-gray-300 to-emerald-200 text-gray-900">
+    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
         Our Lab 👨🏻‍🔬
       </h1>
@@ -144,7 +144,7 @@ function LabObject()
   }, [currentPage]);
   
   return(
-    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 bg-gradient-to-b from-slate-50 via-gray-300 to-emerald-200 text-gray-900">
+    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
         Our Signature Aesthetic 📸
       </h1>
@@ -161,7 +161,7 @@ function LabObject()
               alt={item.name}
               className="w-full h-64 object-cover"
             />
-            <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-50">
+            <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-200">
               {item.name}
             </div>
           </div>

@@ -73,7 +73,7 @@ export default function CoverArts() {
       </div>
 
       {/* ---------- Gallery Section ---------- */}
-      <div className="px-4 sm:px-8 md:px-[60px] lg:px-[100px] xl:px-[150px] py-10 bg-gradient-to-b from-slate-50 via-gray-300 to-emerald-200">
+      <div className="px-4 sm:px-8 md:px-[60px] lg:px-[100px] xl:px-[150px] py-10 ">
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"
@@ -94,9 +94,9 @@ export default function CoverArts() {
                 className="w-full rounded-lg shadow-md transition-transform hover:scale-[1.02]"
                 loading="lazy"
               />
-              <p className="text-center mt-2 text-sm text-gray-600">
+              {/* <p className="text-center mt-2 text-sm text-gray-600">
                 {img.name}
-              </p>
+              </p> */}
             </div>
           ))}
         </Masonry>

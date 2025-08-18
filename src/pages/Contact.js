@@ -124,8 +124,8 @@ function Contact() {
                   <strong>Visit us at:</strong><br />
                   Room No. S 01, Second Floor<br />
                   School of Biochemical Engineering<br />
-                  Indian Institute of Technology (BHU), Varanasi<br />
-                  221005, India
+                  Indian Institute of Technology (BHU), Varanasi, Uttar Pradesh,<br />
+                  India- 221005
                 </p>
               </div>
 

@@ -11,14 +11,14 @@ function Header() {
     }`;
 
   return (
-    <header className="bg-white shadow-lg px-6 md:px-[120px] py-4">
+    <header className="bg-white shadow-lg px-6 md:px-[120px] py-0">
       <div className="flex items-center justify-between">
         {/* ------------------ Logo ------------------ */}
         <div className="flex items-center">
           <img src={logo} alt="MINT Logo" className="h-20 sm:h-24 md:h-[110px]" />
           <div className="leading-tight ml-2">
-            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Bright NanoGhost</h1>
-            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Group</h1>
+            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Bright NanoGhost Group</h1>
+            {/* <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Group</h1> */}
             {/* <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Lab</h1> */}
           </div>
         </div>
@@ -67,8 +67,8 @@ function Header() {
           </div>
           <NavLink to="/patents" className={navLinkClass}>Patents</NavLink>
           <NavLink to="/cover-arts" className={navLinkClass}>Cover Arts</NavLink>
-          <NavLink to="/contact" className={navLinkClass}>Contact</NavLink>
           <NavLink to="/gallery" className={navLinkClass}>Gallery</NavLink>
+          <NavLink to="/contact" className={navLinkClass}>Contact</NavLink>
           <NavLink to="/position" className={navLinkClass}>Position</NavLink>
         </nav>
       </div>
@@ -83,8 +83,8 @@ function Header() {
           <NavLink to="/publications/books" className={navLinkClass} onClick={() => setMenuOpen(false)}>Books & Chapters</NavLink>
           <NavLink to="/patents" className={navLinkClass} onClick={() => setMenuOpen(false)}>Patents</NavLink>
           <NavLink to="/cover-arts" className={navLinkClass} onClick={() => setMenuOpen(false)}>Cover Arts</NavLink>
-          <NavLink to="/contact" className={navLinkClass} onClick={() => setMenuOpen(false)}>Contact</NavLink>
           <NavLink to="/gallery" className={navLinkClass} onClick={() => setMenuOpen(false)}>Gallery</NavLink>
+          <NavLink to="/contact" className={navLinkClass} onClick={() => setMenuOpen(false)}>Contact</NavLink>
           <NavLink to="/position" className={navLinkClass} onClick={() => setMenuOpen(false)}>Position</NavLink>
         </div>
       )}

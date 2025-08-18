@@ -15,7 +15,7 @@ function Footer() {
             Bright NanoGhost Group
           </Link>
           <p className="text-[20px] leading-tight pb-[10px] text-gray-300">
-            Interventional Theranostics & Multimodal Imaging
+            Interventional Theranostics & Molecular Imaging Research
           </p>
 
           {/* Social Icons */}
@@ -39,7 +39,7 @@ function Footer() {
           </p>
 
           {/* External Links */}
-          <div className="mt-12 text-[15px] space-y-1 text-gray-400">
+          {/* <div className="mt-12 text-[15px] space-y-1 text-gray-400">
             <p>
               Associate Editor:{' '}
               <a
@@ -73,13 +73,13 @@ function Footer() {
                 CBMI (ACS)
               </a>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* -----------------------------------------CREDIT SECTION (ALWAYS LAST)----------------------------------------- */}
       <div className="mt-4 text-[15px] lg:px-20 text-white">
-        Website designed by{' '}
+        Website developed by{' '}
         <a
           href="https://github.com/Rk1312"
           target="_blank"
