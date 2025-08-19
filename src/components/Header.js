@@ -17,7 +17,7 @@ function Header() {
         <div className="flex items-center">
           <img src={logo} alt="MINT Logo" className="h-20 sm:h-24 md:h-[110px]" />
           <div className="leading-tight ml-2">
-            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Bright NanoGhost Group</h1>
+            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Bright-NANOGhost Group</h1>
             {/* <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Group</h1> */}
             {/* <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Lab</h1> */}
           </div>

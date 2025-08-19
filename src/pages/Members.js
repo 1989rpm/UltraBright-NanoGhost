@@ -5,6 +5,7 @@ import { FaLinkedin, FaXTwitter, FaEnvelope, FaGoogleScholar } from 'react-icons
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
 import labimg from '../assets/grpimage.jpg'
+import orcid from '../assets/orcid.png'
 
 //---------------------------Dummy----Data-----Use-----when------Backend------Offline----------------------------------------------------------
 // import member1 from '../assets/members/himanshu.jpg';
@@ -50,6 +51,7 @@ function HoverCard({ member }) {
             {member.email && <a href={`mailto:${member.email}`}><FaEnvelope size={24} /></a>}
             {member.google_scholar && <a href={member.google_scholar}><FaGoogleScholar size={24} /></a>}
             {member.twitter && <a href={member.twitter}><FaXTwitter size={24} /></a>}
+            {member.orcid && <a href={member.orcid}><img src={orcid} alt="orcid icon" className='w-6 h-6'/></a>}
           </div>
         </div>
         <div className="text-center sm:text-left">
@@ -122,8 +124,8 @@ function Members() {
                 <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                   <img src={labHead[0].image} alt="Lab Head" className="w-full h-full object-cover" />
                 </div>
-                <div className="mt-10 text-center md:text-center text-sm">
-                  <p>Editoral Board</p>
+                <div className="mt-10 sm:mt-10 md:mt-10 lg:mt-20 text-center md:text-center text-sm">
+                  <p className='text-lg mb-4'>Editoral Board</p>
                   <p className="mt-2 text-lg font-semibold text-purple-700 hover:text-purple-900">
                     <a href="https://pubs.acs.org/journal/nalefd" target="_blank" rel="noreferrer">NanoLetters</a>
                   </p>
@@ -146,6 +148,7 @@ function Members() {
                   {labHead[0].email && <a href={`mailto:${labHead[0].email}`}><FaEnvelope size={24} /></a>}
                   {labHead[0].twitter && <a href={labHead[0].twitter}><FaXTwitter size={24} /></a>}
                   {labHead[0].google_scholar && <a href={labHead[0].google_scholar}><FaGoogleScholar size={24} /></a>}
+                  {labHead[0].orcid && <a href={labHead[0].orcid}><img src={orcid} alt="orcid icon" className='w-6 h-6'/></a>}
                 </div>
                 <p className="mt-6 text-[15px] sm:text-[15px] md:text-[15px] lg:text-[15px] text-justify text-gray-700 whitespace-pre-line">
                   {labHead[0].description}

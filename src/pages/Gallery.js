@@ -49,6 +49,9 @@ const Gallery = () => {
       {/*------------------------------------------ Other Images ---------------------------------------------*/}
       <LabObject />
 
+      {/*------------------------------------------ Other Images ---------------------------------------------*/}
+      <LabTour />
+
     </div>
   );
 };
@@ -79,7 +82,7 @@ function LabPhoto()
   return(
     <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
-        Our Lab 👨🏻‍🔬
+        Lab Activities
       </h1>
 
       <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-2">
@@ -94,6 +97,9 @@ function LabPhoto()
               alt={item.name}
               className="w-full h-64 sm:h-80 object-cover"
             />
+            <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-200">
+              {item.name}
+            </div>
           </div>
         ))}
       </div>
@@ -146,7 +152,7 @@ function LabObject()
   return(
     <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
-        Our Signature Aesthetic 📸
+        Our Signature Aesthetic
       </h1>
 
       <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -181,6 +187,77 @@ function LabObject()
         index={index}
         close={() => setIndex(-1)}
         slides={galleryImages.map((img) => ({
+          src: img.src,
+          title: img.name,
+        }))}
+        plugins={[Captions]}
+        captions={{ descriptionTextAlign: "center" }}
+      />
+    </div>
+  );
+}
+
+function LabTour()
+{
+  const [index, setIndex] = useState(-1);
+  const [TourImages, setTour] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 30; // adjust as needed
+  
+  useEffect(() => {
+    axiosInstance.get(`tour/?page=${currentPage}`)
+      .then(res => {
+        const formatted = (res.data.results || []).map(item => ({
+          src: item.image,        // match Lightbox src
+          name: item.caption      // match Lightbox description
+        }));
+        setTour(formatted);
+        setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+      })
+      .catch((err) => {
+        console.error("Error fetching gallery:", err);
+      });
+  }, [currentPage]);
+  
+  return(
+    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
+      <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
+        Lab Facilities
+      </h1>
+
+      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-2">
+        {TourImages.map((item, i) => (
+          <div
+            key={i}
+            className="rounded overflow-hidden shadow-md hover:shadow-lg transform hover:scale-[1.03] transition duration-300 bg-white cursor-pointer"
+            onClick={() => setIndex(i)}
+          >
+            <img
+              src={item.src}
+              alt={item.name}
+              className="w-full h-64 object-cover"
+            />
+            <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-200">
+              {item.name}
+            </div>
+          </div>
+        ))}
+      </div>
+        
+      {/* Pagination */}
+      <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+      />
+
+      {/* Lightbox */}
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        slides={TourImages.map((img) => ({
           src: img.src,
           title: img.name,
         }))}

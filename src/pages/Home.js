@@ -47,6 +47,12 @@ function Home() {
 
       {/*------------------------------------------- News Section--------------------------------------------------- */}
       <NewsSlider />
+
+      <div>
+        <p className="text-2xl text-black md:text-2xl max-w-6xl mb-6 mx-auto">
+              Our research is funded by Anusandhan National Research Foundation (ANRF), Government of India. 
+        </p>
+      </div>
     </>
   );
 }
