@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import axiosInstance from '../api/axios';
 import NewsSlider from '../components/NewsSlider';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 //import homeBackground from '../assets/home_background.jpg';
@@ -48,13 +50,54 @@ function Home() {
       {/*------------------------------------------- News Section--------------------------------------------------- */}
       <NewsSlider />
 
-      <div>
-        <p className="text-2xl text-black md:text-2xl max-w-6xl mb-6 mx-auto">
-              Our research is funded by Anusandhan National Research Foundation (ANRF), Government of India. 
-        </p>
-      </div>
+      <Funding />
     </>
   );
+}
+
+
+function Funding()
+{ 
+  const [fundings, setfundings] = useState([]);
+
+  useEffect(() => {
+    axiosInstance.get('fundings/')
+      .then(res => setfundings(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+  return(
+    <div className="mb-10">
+      <p className="text-2xl text-black text-start md:text-2xl max-w-6xl mb-10 mx-auto">
+        Our research is funded by: 
+      </p>
+      {/* Images */}
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-8">
+          {fundings.map((funding) => (
+            <div
+              key={funding.id}
+              className="basis-1/2 sm:basis-1/3 md:basis-1/4 flex flex-col items-center"
+            >
+              {/* Logo: fixed height, keep aspect ratio */}
+              <img
+                src={funding.image}
+                alt="LOGO"
+                className="h-20 w-auto object-contain"
+              />
+
+              {/* Optional Caption */}
+              {funding.caption && (
+                <p className="mt-2 text-sm text-gray-700 text-center">
+                  {funding.caption}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default Home;

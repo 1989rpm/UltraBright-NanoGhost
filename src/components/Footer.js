@@ -12,7 +12,7 @@ function Footer() {
         <div className="md:w-1/2 w-full md:mb-0">
           {/* Lab Name */}
           <Link to="/" className="text-[40px] leading-tight mb-[10px] font-bold hover:text-gray-300 transition block">
-            Bright-NANOGhost Group
+            Bright-NanoGhost Group
           </Link>
           <p className="text-[20px] leading-tight pb-[10px] text-gray-300">
             Interventional Theranostics & Molecular Imaging Research
@@ -30,7 +30,7 @@ function Footer() {
         </div>
 
         {/* -----------------------------------------RIGHT SECTION----------------------------------------- */}
-        <div className="md:w-1/2 w-full md:ml-[100px]">
+        <div className="md:w-1/2 w-full md:ml-[100px] lg:pl-[100px]">
           {/* Address */}
           <h2 className="text-[30px] font-semibold">Address:</h2>
           <p className="text-[15px] leading-6 text-gray-300">

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { FaLinkedin, FaXTwitter, FaEnvelope, FaGoogleScholar } from 'react-icons/fa6';
+import { FaLinkedin, FaXTwitter, FaEnvelope, FaGoogleScholar, FaGithub } from 'react-icons/fa6';
 //import { AiFillOrcid } from "react-icons/ai";
 //import labHeadImage from '../assets/members/rpm.jpg';
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
 import labimg from '../assets/grpimage.jpg'
 import orcid from '../assets/orcid.png'
+import DOMPurify from 'dompurify';
 
 //---------------------------Dummy----Data-----Use-----when------Backend------Offline----------------------------------------------------------
 // import member1 from '../assets/members/himanshu.jpg';
@@ -39,6 +40,9 @@ import orcid from '../assets/orcid.png'
 //-----------------------------------------------Member-Hover-Card-Animation-Function-----------------------------------------
 
 function HoverCard({ member }) {
+
+  const sanitizedDescription = DOMPurify.sanitize(member.description);
+
   return (
     <div className="bg-gray-100 rounded-xl p-6 overflow-hidden">
       <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
@@ -51,15 +55,16 @@ function HoverCard({ member }) {
             {member.email && <a href={`mailto:${member.email}`}><FaEnvelope size={24} /></a>}
             {member.google_scholar && <a href={member.google_scholar}><FaGoogleScholar size={24} /></a>}
             {member.twitter && <a href={member.twitter}><FaXTwitter size={24} /></a>}
+            {member.github && <a href={member.github}><FaGithub size={24} /></a>}
             {member.orcid && <a href={member.orcid}><img src={orcid} alt="orcid icon" className='w-6 h-6'/></a>}
           </div>
         </div>
         <div className="text-center sm:text-left">
           <h3 className="text-2xl sm:text-4xl font-semibold text-purple-900">{member.name}</h3>
           <p className="text-lg sm:text-xl text-gray-600">{member.position}</p>
-          <p className="mt-4 text-sm sm:text-base text-justify text-gray-700 whitespace-pre-line">
-            {member.description}
-          </p>
+          <div className="mt-4 text-sm sm:text-base text-justify text-gray-700 whitespace-pre-line"
+            dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+          />
         </div>
       </div>
     </div>
@@ -86,6 +91,10 @@ function Members() {
       .then((res) => setAlumni(res.data))
       .catch((err) => console.error("Error fetching alumni", err));
   }, []);
+
+  const sanitizedLabheadDescription = labHead[0]
+    ? DOMPurify.sanitize(labHead[0].description || "")
+    : "";
 
   return (
     <div>
@@ -150,9 +159,9 @@ function Members() {
                   {labHead[0].google_scholar && <a href={labHead[0].google_scholar}><FaGoogleScholar size={24} /></a>}
                   {labHead[0].orcid && <a href={labHead[0].orcid}><img src={orcid} alt="orcid icon" className='w-6 h-6'/></a>}
                 </div>
-                <p className="mt-6 text-[15px] sm:text-[15px] md:text-[15px] lg:text-[15px] text-justify text-gray-700 whitespace-pre-line">
-                  {labHead[0].description}
-                </p>
+                <div className="mt-6 text-[15px] sm:text-[15px] md:text-[15px] lg:text-[15px] text-justify text-gray-700 whitespace-pre-line"
+                  dangerouslySetInnerHTML={{ __html: sanitizedLabheadDescription }}
+                />
               </div>
             </div>
           </div>

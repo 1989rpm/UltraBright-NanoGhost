@@ -1,6 +1,6 @@
 import { useScroll, useTransform, useSpring, motion } from 'framer-motion';
 import { useRef,useState, useEffect } from 'react';
-import img0 from '../assets/research/img0.png';
+//import img0 from '../assets/research/img0.png';
 // import img1 from '../assets/research/img1.jpg';
 // import img2 from '../assets/research/img2.jpg';
 // //import img3 from '../assets/research/img3.jpg';
@@ -10,6 +10,7 @@ import img0 from '../assets/research/img0.png';
 // import img7 from '../assets/research/img7.jpg';
 import bgrnd from '../assets/backs.png'
 import axiosInstance from '../api/axios';
+import DOMPurify from 'dompurify';
 
 //-----------------------------------------------------------Descriptions---------------------------------------------------------
 // const researchData = [
@@ -104,13 +105,13 @@ function Research() {
       </div>
 
       {/* Lab Image */}
-      <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-6 sm:mt-8">
+      {/* <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-6 sm:mt-8">
         <img
           src={img0}
           alt="Research"
           className="w-full h-auto rounded-xl object-cover"
         />
-      </div>
+      </div> */}
 
       {/* Research Cards */}
       <div className="px-4 sm:px-6 py-10 max-w-7xl mx-auto">
@@ -139,6 +140,8 @@ function ScrollZoomCard({ item, idx }) {
   const rawScale = useTransform(scrollYProgress, [0, 1], [0.94, 1.08]);
   const scale = useSpring(rawScale, { stiffness: 200, damping: 100 });
 
+  const sanitizedDescription = DOMPurify.sanitize(item.description);
+
   return (
     <div
       ref={ref}
@@ -165,9 +168,9 @@ function ScrollZoomCard({ item, idx }) {
         <h2 className="text-2xl sm:text-2xl md:text-2xl font-bold text-center md:text-center mt-4 md:mt-0 mb-4 sm:mb-6 text-purple-900">
           {item.name}
         </h2>
-        <p className="text-justify text-gray-800 leading-relaxed text-[12px] sm:text-[13px] md:text-[14px] pb-4 whitespace-pre-line">
-          {item.description}
-        </p>
+        <div className="text-justify text-gray-800 leading-relaxed text-[12px] sm:text-[13px] md:text-[14px] pb-4 whitespace-pre-line"
+             dangerouslySetInnerHTML={{ __html: sanitizedDescription }} 
+        />
       </div>
     </div>
   );

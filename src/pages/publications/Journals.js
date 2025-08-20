@@ -4,6 +4,7 @@ import { FaLink } from 'react-icons/fa';
 import bgrnd from '../../assets/backs.png'
 import axiosInstance from '../../api/axios';
 import Pagination from '../../components/Pagination';
+import DOMPurify from 'dompurify';
 
 function Journals() 
 { 
@@ -83,7 +84,11 @@ function Journals()
 
         {/* Journal Entries */}
         <div className="space-y-12">
-          {entries.map(entry => (
+          {entries.map(entry => {
+            const sanitizedText = DOMPurify.sanitize(entry.text);
+            const sanitizedCaption = DOMPurify.sanitize(entry.caption);
+          
+          return(
             <div
               key={entry.id}
               className="bg-gray-50 shadow-md rounded-2xl overflow-hidden flex flex-col md:flex-row items-center md:items-start p-6 transform transition-transform duration-1000 hover:scale-[1.05] hover:shadow-xl"
@@ -94,7 +99,7 @@ function Journals()
                 className="w-full md:w-[150px] h-auto object-cover rounded-xl"
               />
               <div className="md:ml-10 mt-6 md:mt-0 mr-4 md:mr-4 text-left text-gray-800 w-full">
-                <p className='text-[20px]'>{entry.text}</p>
+                <div className='text-[20px]' dangerouslySetInnerHTML={{ __html: sanitizedText}}/>
                 <a
                   href={entry.link}
                   target="_blank"
@@ -104,10 +109,10 @@ function Journals()
                 >
                   <FaLink size={30} />
                 </a>
-                <p className='mt-8 text-[15px]'>{entry.caption}</p>
+                <div className='mt-8 text-[15px]' dangerouslySetInnerHTML={{ __html: sanitizedCaption }}/>
               </div>
             </div>
-          ))}
+          )})}
         </div>
 
         {/* Pagination */}

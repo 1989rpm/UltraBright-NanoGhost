@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
+import DOMPurify from 'dompurify';
 
 function Position() {
 
@@ -41,12 +42,14 @@ function Position() {
           {positions.length === 0 ? (
             <p className="text-center text-gray-600">No open positions at the moment.</p>
           ) : (
-            positions.map((pos, index) => (
-              <div key={index} className="md:flex gap-8">
-                <h2 className="font-semibold text-lg min-w-[180px] mb-2 md:mb-0">{pos.position}:</h2>
-                <p className="text-gray-700 ml-8 text-justify">{pos.description}</p>
-              </div>
-            ))
+            positions.map((pos, index) => {
+              const sanitizedposition = DOMPurify.sanitize(pos.description);
+              return(
+                <div key={index} className="md:flex gap-8">
+                  <h2 className="font-semibold text-lg min-w-[180px] mb-2 md:mb-0">{pos.position}:</h2>
+                  <div className="text-gray-700 ml-8 text-justify" dangerouslySetInnerHTML={{ __html: sanitizedposition}} />
+                </div>
+            )})
           )} 
         </motion.div>
         <h3 className="text-xl text-center my-12 text-black">

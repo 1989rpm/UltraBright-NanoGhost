@@ -44,34 +44,43 @@ const Gallery = () => {
       </div>
 
       {/*------------------------------------------ Lab Images ---------------------------------------------*/}
-      <LabPhoto />
+      <SmallStart />
 
       {/*------------------------------------------ Other Images ---------------------------------------------*/}
-      <LabObject />
+      <OurFun />
 
       {/*------------------------------------------ Other Images ---------------------------------------------*/}
-      <LabTour />
+      <TheVision />
+
+      {/*------------------------------------------ Lab Images ---------------------------------------------*/}
+      <LabActivities />
+
+      {/*------------------------------------------ Other Images ---------------------------------------------*/}
+      <OurAesthetics />
+
+      {/*------------------------------------------ Other Images ---------------------------------------------*/}
+      <LabFacilities />
 
     </div>
   );
 };
 
-function LabPhoto()
+function SmallStart()
 {
-  const [labImages, setLabImages] = useState([]);
+  const [v1Images, setv1Images] = useState([]);
   const [index, setIndex] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 30; // adjust as needed
 
   useEffect(() => { 
-    axiosInstance.get(`lab-gallery/?page=${currentPage}`)
+    axiosInstance.get(`gallery/small-start/?page=${currentPage}`)
       .then(res => {
         const formatted = (res.data.results || []).map(item => ({
           src: item.image,        // match Lightbox src
           name: item.caption      // match Lightbox description
         }));
-        setLabImages(formatted);
+        setv1Images(formatted);
         setTotalPages(Math.ceil(res.data.count / itemsPerPage));
       })
       .catch((err) => {
@@ -82,11 +91,11 @@ function LabPhoto()
   return(
     <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
-        Lab Activities
+        Small Start
       </h1>
 
-      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-2">
-        {labImages.map((item, i) => (
+      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {v1Images.map((item, i) => (
           <div
             key={i}
             className="rounded overflow-hidden shadow-md hover:shadow-lg transform hover:scale-[1.03] transition duration-300 bg-white cursor-pointer"
@@ -115,7 +124,7 @@ function LabPhoto()
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
-        slides={labImages.map((img) => ({
+        slides={v1Images.map((img) => ({
           src: img.src,
           title: img.name,
         }))}
@@ -126,22 +135,22 @@ function LabPhoto()
   );
 }
 
-function LabObject()
+function OurFun()
 {
   const [index, setIndex] = useState(-1);
-  const [galleryImages, setImages] = useState([]);
+  const [v2Images, setv2Images] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 30; // adjust as needed
   
   useEffect(() => {
-    axiosInstance.get(`gallery/?page=${currentPage}`)
+    axiosInstance.get(`gallery/our-fun/?page=${currentPage}`)
       .then(res => {
         const formatted = (res.data.results || []).map(item => ({
           src: item.image,        // match Lightbox src
           name: item.caption      // match Lightbox description
         }));
-        setImages(formatted);
+        setv2Images(formatted);
         setTotalPages(Math.ceil(res.data.count / itemsPerPage));
       })
       .catch((err) => {
@@ -152,11 +161,11 @@ function LabObject()
   return(
     <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
-        Our Signature Aesthetic
+        Our Fun
       </h1>
 
       <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {galleryImages.map((item, i) => (
+        {v2Images.map((item, i) => (
           <div
             key={i}
             className="rounded overflow-hidden shadow-md hover:shadow-lg transform hover:scale-[1.03] transition duration-300 bg-white cursor-pointer"
@@ -186,7 +195,7 @@ function LabObject()
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
-        slides={galleryImages.map((img) => ({
+        slides={v2Images.map((img) => ({
           src: img.src,
           title: img.name,
         }))}
@@ -197,22 +206,233 @@ function LabObject()
   );
 }
 
-function LabTour()
+function TheVision()
 {
   const [index, setIndex] = useState(-1);
-  const [TourImages, setTour] = useState([]);
+  const [v3Images, setv3Images] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 30; // adjust as needed
   
   useEffect(() => {
-    axiosInstance.get(`tour/?page=${currentPage}`)
+    axiosInstance.get(`gallery/the-vision/?page=${currentPage}`)
       .then(res => {
         const formatted = (res.data.results || []).map(item => ({
           src: item.image,        // match Lightbox src
           name: item.caption      // match Lightbox description
         }));
-        setTour(formatted);
+        setv3Images(formatted);
+        setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+      })
+      .catch((err) => {
+        console.error("Error fetching gallery:", err);
+      });
+  }, [currentPage]);
+  
+  return(
+    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
+      <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
+        The Vision
+      </h1>
+
+      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {v3Images.map((item, i) => (
+          <div
+            key={i}
+            className="rounded overflow-hidden shadow-md hover:shadow-lg transform hover:scale-[1.03] transition duration-300 bg-white cursor-pointer"
+            onClick={() => setIndex(i)}
+          >
+            <img
+              src={item.src}
+              alt={item.name}
+              className="w-full h-64 object-cover"
+            />
+            <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-200">
+              {item.name}
+            </div>
+          </div>
+        ))}
+      </div>
+        
+      {/* Pagination */}
+      <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+      />
+
+      {/* Lightbox */}
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        slides={v3Images.map((img) => ({
+          src: img.src,
+          title: img.name,
+        }))}
+        plugins={[Captions]}
+        captions={{ descriptionTextAlign: "center" }}
+      />
+    </div>
+  );
+}
+
+function LabActivities()
+{
+  const [v4Images, setv4Images] = useState([]);
+  const [index, setIndex] = useState(-1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 30; // adjust as needed
+
+  useEffect(() => { 
+    axiosInstance.get(`gallery/lab-activities/?page=${currentPage}`)
+      .then(res => {
+        const formatted = (res.data.results || []).map(item => ({
+          src: item.image,        // match Lightbox src
+          name: item.caption      // match Lightbox description
+        }));
+        setv4Images(formatted);
+        setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+      })
+      .catch((err) => {
+        console.error("Error fetching gallery:", err);
+      });
+  }, [currentPage]);
+  
+  return(
+    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
+      <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
+        Lab Activities
+      </h1>
+
+      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {v4Images.map((item, i) => (
+          <div
+            key={i}
+            className="rounded overflow-hidden shadow-md hover:shadow-lg transform hover:scale-[1.03] transition duration-300 bg-white cursor-pointer"
+            onClick={() => setIndex(i)}
+          >
+            <img
+              src={item.src}
+              alt={item.name}
+              className="w-full h-64 sm:h-80 object-cover"
+            />
+            <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-200">
+              {item.name}
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Pagination */}
+      <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+      />
+
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        slides={v4Images.map((img) => ({
+          src: img.src,
+          title: img.name,
+        }))}
+        plugins={[Captions]}
+        captions={{ descriptionTextAlign: "center" }}
+      />
+    </div>
+  );
+}
+
+function OurAesthetics()
+{
+  const [v5Images, setv5Images] = useState([]);
+  const [index, setIndex] = useState(-1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 30; // adjust as needed
+
+  useEffect(() => { 
+    axiosInstance.get(`gallery/our-aesthetics/?page=${currentPage}`)
+      .then(res => {
+        const formatted = (res.data.results || []).map(item => ({
+          src: item.image,        // match Lightbox src
+          name: item.caption      // match Lightbox description
+        }));
+        setv5Images(formatted);
+        setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+      })
+      .catch((err) => {
+        console.error("Error fetching gallery:", err);
+      });
+  }, [currentPage]);
+  
+  return(
+    <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
+      <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
+        Our Signature Aesthetics
+      </h1>
+
+      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {v5Images.map((item, i) => (
+          <div
+            key={i}
+            className="rounded overflow-hidden shadow-md hover:shadow-lg transform hover:scale-[1.03] transition duration-300 bg-white cursor-pointer"
+            onClick={() => setIndex(i)}
+          >
+            <img
+              src={item.src}
+              alt={item.name}
+              className="w-full h-64 sm:h-80 object-cover"
+            />
+            <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-200">
+              {item.name}
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Pagination */}
+      <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+      />
+
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        slides={v5Images.map((img) => ({
+          src: img.src,
+          title: img.name,
+        }))}
+        plugins={[Captions]}
+        captions={{ descriptionTextAlign: "center" }}
+      />
+    </div>
+  );
+}
+
+function LabFacilities()
+{
+  const [v6Images, setv6Images] = useState([]);
+  const [index, setIndex] = useState(-1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 30; // adjust as needed
+
+  useEffect(() => { 
+    axiosInstance.get(`gallery/lab-facilities/?page=${currentPage}`)
+      .then(res => {
+        const formatted = (res.data.results || []).map(item => ({
+          src: item.image,        // match Lightbox src
+          name: item.caption      // match Lightbox description
+        }));
+        setv6Images(formatted);
         setTotalPages(Math.ceil(res.data.count / itemsPerPage));
       })
       .catch((err) => {
@@ -226,8 +446,8 @@ function LabTour()
         Lab Facilities
       </h1>
 
-      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-2">
-        {TourImages.map((item, i) => (
+      <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {v6Images.map((item, i) => (
           <div
             key={i}
             className="rounded overflow-hidden shadow-md hover:shadow-lg transform hover:scale-[1.03] transition duration-300 bg-white cursor-pointer"
@@ -236,7 +456,7 @@ function LabTour()
             <img
               src={item.src}
               alt={item.name}
-              className="w-full h-64 object-cover"
+              className="w-full h-64 sm:h-80 object-cover"
             />
             <div className="px-3 py-2 text-center font-medium text-gray-800 bg-gray-200">
               {item.name}
@@ -244,7 +464,7 @@ function LabTour()
           </div>
         ))}
       </div>
-        
+      
       {/* Pagination */}
       <Pagination
           currentPage={currentPage}
@@ -252,12 +472,11 @@ function LabTour()
           onPageChange={setCurrentPage}
       />
 
-      {/* Lightbox */}
       <Lightbox
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
-        slides={TourImages.map((img) => ({
+        slides={v6Images.map((img) => ({
           src: img.src,
           title: img.name,
         }))}

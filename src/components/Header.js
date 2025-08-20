@@ -10,14 +10,19 @@ function Header() {
       isActive ? 'bg-black rounded-md text-white' : 'hover:text-purple-900'
     }`;
 
+  const dropdownLinkClass = ({ isActive }) =>
+    `block w-full text-left px-4 py-2 transition duration-200 text-sm ${
+      isActive ? 'bg-black text-white' : 'hover:text-purple-900'
+    }`;
+
   return (
-    <header className="bg-white shadow-lg px-6 md:px-[120px] py-0">
+    <header className="bg-gradient-to-b from-gray-100 via-neutral-50 to-neutral-50 shadow-lg px-6 md:px-[120px] py-0">
       <div className="flex items-center justify-between">
         {/* ------------------ Logo ------------------ */}
         <div className="flex items-center">
           <img src={logo} alt="MINT Logo" className="h-20 sm:h-24 md:h-[110px]" />
           <div className="leading-tight ml-2">
-            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Bright-NANOGhost Group</h1>
+            <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Bright-NanoGhost Group</h1>
             {/* <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Group</h1> */}
             {/* <h1 className="text-[16px] sm:text-[20px] md:text-[25px] font-bold text-gray-900">Lab</h1> */}
           </div>
@@ -54,15 +59,31 @@ function Header() {
         </button>
 
         {/* ------------------ Navigation (Desktop) ------------------ */}
-        <nav className="hidden lg:flex space-x-1 text-[15px] font-medium text-gray-500">
+        <nav className="hidden lg:flex items-center space-x-1 text-[15px] font-medium text-gray-500">
           <NavLink to="/" className={navLinkClass}>Home</NavLink>
           <NavLink to="/research" className={navLinkClass}>Research</NavLink>
           <NavLink to="/members" className={navLinkClass}>Members</NavLink>
           <div className="relative group">
-            <button className="hover:text-purple-900 px-3 pt-2">Publications▾</button>
-            <div className="absolute hidden group-hover:block bg-white shadow-md left-0 z-10 w-52">
-              <NavLink to="/publications/journals" className={navLinkClass}>Journal Articles</NavLink>
-              <NavLink to="/publications/books" className={navLinkClass}>Books & Chapters</NavLink>
+            <button className="flex items-center px-3 hover:text-purple-900 ">
+              <span>Publications</span>
+              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </button>
+            <div
+              className="absolute left-0 top-full w-52 rounded-md shadow-lg z-20
+                         bg-white ring-1 ring-black ring-opacity-5
+                         transition-opacity duration-200 ease-out
+                         opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+            >
+              <div className="py-1"> {/* Internal padding for the links */}
+                <NavLink to="/publications/journals" className={dropdownLinkClass}>
+                  Journal Articles
+                </NavLink>
+                <NavLink to="/publications/books" className={dropdownLinkClass}>
+                  Books & Chapters
+                </NavLink>
+              </div>
             </div>
           </div>
           <NavLink to="/patents" className={navLinkClass}>Patents</NavLink>

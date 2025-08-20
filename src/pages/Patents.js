@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
 import Pagination from '../components/Pagination';
+import DOMPurify from 'dompurify';
 
 function Patents() 
 {
@@ -76,14 +77,16 @@ function Patent()
         <div className="mb-16">
             <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">National and International Patents</h2>
             <div className="space-y-6">
-            {Patent.map(Patent => (
-                <div
-                key={Patent.id}
-                className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
-                >
-                <p className="text-lg text-gray-800">{Patent.description}</p>
-                </div>
-            ))}
+            {Patent.map(Patent => {
+                const sanitizedpatent = DOMPurify.sanitize(Patent.description);
+                return(
+                    <div
+                    key={Patent.id}
+                    className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
+                    >
+                    <div className="text-lg text-gray-800" dangerouslySetInnerHTML={{ __html: sanitizedpatent}}/>
+                    </div>
+            )})}
             </div>
 
             {/* Pagination */}
@@ -116,14 +119,16 @@ function TradeMark()
         <div>
             <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Trade Marks</h2>
             <div className="space-y-6">
-                {Trade_Marks.map(Trade_Marks => (
-                    <div
-                    key={Trade_Marks.id}
-                    className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
-                    >
-                        <p className="text-lg text-gray-800">{Trade_Marks.description}</p>
-                    </div>
-                ))}
+                {Trade_Marks.map(Trade_Marks => {
+                    const sanitizedtrademark = DOMPurify.sanitize(Trade_Marks.description);
+                    return(
+                        <div
+                        key={Trade_Marks.id}
+                        className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
+                        >
+                            <div className="text-lg text-gray-800" dangerouslySetInnerHTML={{ __html: sanitizedtrademark}}/>
+                        </div>
+                )})}
             </div>
 
             {/* Pagination */}

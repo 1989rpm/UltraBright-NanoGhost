@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import bgrnd from '../../assets/backs.png'
 import axiosInstance from '../../api/axios';
 import Pagination from '../../components/Pagination';
+import DOMPurify from 'dompurify';
 
 function Books() 
 {
@@ -75,14 +76,16 @@ function Book()
         <div className="mb-16">
             <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Books</h2>
             <div className="space-y-6">
-            {books.map(book => (
-                <div
-                key={book.id}
-                className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
-                >
-                <p className="text-lg text-gray-800">{book.description}</p>
-                </div>
-            ))}
+            {books.map(book => {
+                const sanitizedbooks = DOMPurify.sanitize(book.description);
+                return(
+                    <div
+                    key={book.id}
+                    className="bg-gray-50 p-6 rounded-xl shadow-md transform transition-transform duration-1000 hover:scale-[1.05]"
+                    >
+                    <div className="text-lg text-gray-800" dangerouslySetInnerHTML={{ __html: sanitizedbooks}} />
+                    </div>
+            )})}
             </div>
 
             {/* Pagination */}
@@ -116,14 +119,16 @@ function Chapters()
         <div>
             <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">Book Chapters</h2>
             <div className="space-y-6">
-                {bookChapters.map(chapter => (
-                    <div
-                    key={chapter.id}
-                    className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
-                    >
-                        <p className="text-lg text-gray-800">{chapter.description}</p>
-                    </div>
-                ))}
+                {bookChapters.map(chapter => {
+                    const sanitizedchapter = DOMPurify.sanitize(chapter.description);
+                    return (
+                        <div
+                        key={chapter.id}
+                        className="bg-gray-50 p-6 rounded-xl shadow-md transform transitition-transform duration-1000 hover:scale-[1.05]"
+                        >
+                            <div className="text-lg text-gray-800" dangerouslySetInnerHTML={{ __html: sanitizedchapter}}/>
+                        </div>
+                )})}
             </div>
 
             {/* Pagination */}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 import axiosInstance from '../api/axios';
+import DOMPurify from 'dompurify';
 
 function NewsSlider() {
   return (
@@ -77,7 +78,8 @@ function NewsTicker()
   }
 
   const currentNews = news[current];
-
+  const sanitizedDescription = DOMPurify.sanitize(currentNews.description);
+  
   return (
     // ========== NEWS BOX (Single Column) ==========
     <div className="mb-16">
@@ -107,7 +109,11 @@ function NewsTicker()
               </div>
             )}
 
-            <p className="text-gray-800 text-[15px]">{currentNews.description}</p>
+
+            <div
+              className="text-gray-800 text-[15px]"
+              dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+            />
 
             {currentNews.hyperlink && (
               <a
@@ -154,15 +160,17 @@ function TwitterHandles()
   return(
     // Twitter Feed 
     <div>
-      {Twitterembeds.map((item, index) => (
-        <div key={index} className="mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">{item.name}</h2>
-          <div className="rounded-md">
-            <div dangerouslySetInnerHTML={{ __html: item.embed_code }} />
-            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+      {Twitterembeds.map((item, index) => {
+        const sanitizedxembed = DOMPurify.sanitize(item.embed_code);
+        return(
+          <div key={index} className="mb-8">
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">{item.name}</h2>
+            <div className="rounded-md">
+              <div dangerouslySetInnerHTML={{ __html: sanitizedxembed }} />
+              <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+            </div>
           </div>
-        </div>
-      ))}
+      )})}
     </div>
   );
 }
@@ -180,14 +188,15 @@ function LinkedinHandles()
   return(
     //LinkedIn Feed 
     <div>
-      {Linkedinembeds.map((item, index) => (
-        <div key={index} className="mb-8 overflow-x-auto w-full max-w-full">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">{item.name}</h2>
-          <div className="rounded-md">
-            <div dangerouslySetInnerHTML={{ __html: item.embed_code }} />
+      {Linkedinembeds.map((item, index) => {
+        return(
+          <div key={index} className="mb-8 overflow-x-auto w-full max-w-full">
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">{item.name}</h2>
+            <div className="rounded-md">
+              <div dangerouslySetInnerHTML={{ __html: item.embed_code }} />
+            </div>
           </div>
-        </div>
-      ))}
+      )})}
     </div>
   );
 }
