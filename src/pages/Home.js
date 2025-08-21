@@ -38,7 +38,7 @@ function Home() {
         <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-10">
           <div className="text-center px-4">
             <h1 className="text-4xl text-white md:text-6xl font-bold mb-4">
-              Theranostics Intervention is easy, but, tricky.
+              Theranostics Intervention is easy, but, tricky
             </h1>
             <p className="text-3xl text-[#95D5B2] md:text-3xl max-w-3xl mx-auto">
               We engineer Molecules and Cells at nanoscale to Develop Theranostics for Early-Stage cancer Imaging and Therapeutics
@@ -68,8 +68,8 @@ function Funding()
 
   return(
     <div className="mb-10">
-      <p className="text-2xl text-black text-start md:text-2xl max-w-6xl mb-10 mx-auto">
-        Our research is funded by: 
+      <p className="text-2xl text-black text-center md:text-2xl max-w-6xl mb-10 mx-auto font-bold">
+        Our research is supported and funded by: 
       </p>
       {/* Images */}
       <div className="max-w-7xl mx-auto">

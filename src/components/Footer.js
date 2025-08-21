@@ -34,7 +34,7 @@ function Footer() {
           {/* Address */}
           <h2 className="text-[30px] font-semibold">Address:</h2>
           <p className="text-[15px] leading-6 text-gray-300">
-            Room No. S 01, Second Floor, School of Biochemical Engineering,<br />
+            Room No. S-01, Second Floor, School of Biochemical Engineering,<br />
             Indian Institute of Technology (BHU), Varanasi, U.P., India - 221005
           </p>
 

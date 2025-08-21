@@ -122,7 +122,7 @@ function Contact() {
                 <p><strong>Call us at:</strong><br />📞 +91 83900 06189</p>
                 <p>
                   <strong>Visit us at:</strong><br />
-                  Room No. S 01, Second Floor<br />
+                  Room No. S-01, Second Floor<br />
                   School of Biochemical Engineering<br />
                   Indian Institute of Technology (BHU), Varanasi, Uttar Pradesh,<br />
                   India- 221005

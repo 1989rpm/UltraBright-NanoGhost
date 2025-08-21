@@ -53,7 +53,7 @@ function Position() {
           )} 
         </motion.div>
         <h3 className="text-xl text-center my-12 text-black">
-          Please email your CV and Cover Letter along with your Research Interest to:
+          Please email your Curriculum vitae and Letter of Recommendation along with your Research Interests to:
             <span className='text-purple-900'>
               <a href={`mailto:rajendra.bce@iitbhu.ac.in`}> rajendra.bce@iitbhu.ac.in</a>
             </span>
