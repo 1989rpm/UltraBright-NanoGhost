@@ -37,7 +37,7 @@ function Journals()
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 20; // adjust as needed
+  const itemsPerPage = 30; // adjust as needed
 
   useEffect(() => {
     axiosInstance.get(`journals/entries/?page=${currentPage}&search=${encodeURIComponent(searchTerm)}`)
@@ -81,6 +81,8 @@ function Journals()
             onChange={handleSearchChange}
           />
         </div>
+
+        <p className='mb-4 text-left'>(*Corresponding-author; #equal contribution)</p>
 
         {/* Journal Entries */}
         <div className="space-y-12">

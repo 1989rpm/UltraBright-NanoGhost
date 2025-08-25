@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import bgrnd from '../../assets/backs.png'
 import axiosInstance from '../../api/axios';
-import Pagination from '../../components/Pagination';
+//import Pagination from '../../components/Pagination';
 import DOMPurify from 'dompurify';
 
 function Books() 
@@ -59,18 +59,18 @@ function Books()
 function Book()
 {
     const [books, setBooks] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const itemsPerPage = 20; // adjust as needed
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [totalPages, setTotalPages] = useState(1);
+    // const itemsPerPage = 20; // adjust as needed
 
     useEffect(() => {
-        axiosInstance.get(`books/?page=${currentPage}`)
+        axiosInstance.get(`books/`)
         .then(res => {
-            setBooks(res.data.results || []);
-            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+            setBooks(res.data || []);
+            // setTotalPages(Math.ceil(res.data.count / itemsPerPage));
         })
         .catch(err => console.error("Error fetching Lab Head", err));
-    }, [currentPage]);
+    }, []);
 
     return(
         <div className="mb-16">
@@ -89,11 +89,11 @@ function Book()
             </div>
 
             {/* Pagination */}
-            <Pagination
+            {/* <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
-            />
+            /> */}
 
         </div>
     );
@@ -102,18 +102,18 @@ function Book()
 function Chapters()
 {
     const [bookChapters, setBookChapters] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const itemsPerPage = 20; // adjust as needed
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [totalPages, setTotalPages] = useState(1);
+    // const itemsPerPage = 20; // adjust as needed
 
     useEffect(() => {
-        axiosInstance.get(`book-chapters/?page=${currentPage}`)
+        axiosInstance.get(`book-chapters/`)
         .then(res => {
-            setBookChapters(res.data.results || []);
-            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+            setBookChapters(res.data || []);
+            // setTotalPages(Math.ceil(res.data.count / itemsPerPage));
         })
         .catch(err => console.error("Error fetching members", err));
-    }, [currentPage]);
+    }, []);
     
     return(
         <div>
@@ -132,11 +132,11 @@ function Chapters()
             </div>
 
             {/* Pagination */}
-            <Pagination
+            {/* <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
-            />
+            /> */}
         </div>
     );
 }

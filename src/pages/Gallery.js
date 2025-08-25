@@ -71,7 +71,7 @@ function SmallStart()
   const [index, setIndex] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 30; // adjust as needed
+  const itemsPerPage = 18; // adjust as needed
 
   useEffect(() => { 
     axiosInstance.get(`gallery/small-start/?page=${currentPage}`)
@@ -91,7 +91,7 @@ function SmallStart()
   return(
     <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 xl:px-32 py-10 text-gray-900">
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-10 text-purple-900">
-        Small Start
+        Humble Beginning
       </h1>
 
       <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -141,7 +141,7 @@ function OurFun()
   const [v2Images, setv2Images] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 30; // adjust as needed
+  const itemsPerPage = 18; // adjust as needed
   
   useEffect(() => {
     axiosInstance.get(`gallery/our-fun/?page=${currentPage}`)
@@ -212,7 +212,7 @@ function TheVision()
   const [v3Images, setv3Images] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 30; // adjust as needed
+  const itemsPerPage = 18; // adjust as needed
   
   useEffect(() => {
     axiosInstance.get(`gallery/the-vision/?page=${currentPage}`)
@@ -283,7 +283,7 @@ function LabActivities()
   const [index, setIndex] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 30; // adjust as needed
+  const itemsPerPage = 18; // adjust as needed
 
   useEffect(() => { 
     axiosInstance.get(`gallery/lab-activities/?page=${currentPage}`)
@@ -423,7 +423,7 @@ function LabFacilities()
   const [index, setIndex] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 30; // adjust as needed
+  const itemsPerPage = 18; // adjust as needed
 
   useEffect(() => { 
     axiosInstance.get(`gallery/lab-facilities/?page=${currentPage}`)

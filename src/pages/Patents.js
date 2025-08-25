@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
-import Pagination from '../components/Pagination';
+//import Pagination from '../components/Pagination';
 import DOMPurify from 'dompurify';
 
 function Patents() 
@@ -60,18 +60,18 @@ function Patents()
 function Patent()
 {
     const [Patent, setPatent] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const itemsPerPage = 20; // adjust as needed
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [totalPages, setTotalPages] = useState(1);
+    // const itemsPerPage = 20; // adjust as needed
 
     useEffect(() => {
-        axiosInstance.get(`patents/?page=${currentPage}`)
+        axiosInstance.get(`patents/`)
         .then(res => {
-            setPatent(res.data.results || []);
-            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+            setPatent(res.data || []);
+            // setTotalPages(Math.ceil(res.data.count / itemsPerPage));
         })
         .catch(err => console.error("Error fetching Lab Head", err));
-    }, [currentPage]);
+    }, []);
 
     return(
         <div className="mb-16">
@@ -89,12 +89,12 @@ function Patent()
             )})}
             </div>
 
-            {/* Pagination */}
+            {/* Pagination
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
-            />
+            /> */}
         </div>
     );
 }
@@ -102,18 +102,18 @@ function Patent()
 function TradeMark()
 {
     const [Trade_Marks, setTrade_Marks] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const itemsPerPage = 20; // adjust as needed
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [totalPages, setTotalPages] = useState(1);
+    // const itemsPerPage = 20; // adjust as needed
 
     useEffect(() => {
-        axiosInstance.get(`trade-marks/?page=${currentPage}`)
+        axiosInstance.get(`trade-marks/`)
         .then(res => {
-            setTrade_Marks(res.data.results || []);
-            setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+            setTrade_Marks(res.data || []);
+            // setTotalPages(Math.ceil(res.data.count / itemsPerPage));
         })
         .catch(err => console.error("Error fetching members", err));
-    }, [currentPage]);
+    }, []);
     
     return(
         <div>
@@ -132,11 +132,11 @@ function TradeMark()
             </div>
 
             {/* Pagination */}
-            <Pagination
+            {/* <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
-            />
+            /> */}
         </div>
     );
 }
