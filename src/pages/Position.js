@@ -45,9 +45,9 @@ function Position() {
             positions.map((pos, index) => {
               const sanitizedposition = DOMPurify.sanitize(pos.description);
               return(
-                <div key={index} className="md:flex gap-8">
-                  <h2 className="font-semibold text-lg min-w-[180px] mb-2 md:mb-0">{pos.position}:</h2>
-                  <div className="text-gray-700 ml-8 text-justify" dangerouslySetInnerHTML={{ __html: sanitizedposition}} />
+                <div key={index} className="grid md:grid-cols-5 gap-6 mb-6 items-start">
+                  <h2 className="font-semibold text-lg col-span-1">{pos.position}:</h2>
+                  <div className="text-gray-700 col-span-4 text-justify" dangerouslySetInnerHTML={{ __html: sanitizedposition}} />
                 </div>
             )})
           )} 

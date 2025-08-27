@@ -62,7 +62,7 @@ function HoverCard({ member }) {
         <div className="text-center sm:text-left">
           <h3 className="text-2xl sm:text-4xl font-semibold text-purple-900">{member.name}</h3>
           <p className="text-lg sm:text-xl text-gray-600">{member.position}</p>
-          <div className="mt-4 text-sm sm:text-base text-justify text-gray-700 whitespace-pre-line"
+          <div className="mt-4 text-sm sm:text-base text-justify text-gray-700"
             dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
           />
         </div>
@@ -159,7 +159,7 @@ function Members() {
                   {labHead[0].google_scholar && <a href={labHead[0].google_scholar}><FaGoogleScholar size={24} /></a>}
                   {labHead[0].orcid && <a href={labHead[0].orcid}><img src={orcid} alt="orcid icon" className='w-6 h-6'/></a>}
                 </div>
-                <div className="mt-6 text-[15px] sm:text-[15px] md:text-[15px] lg:text-[15px] text-justify text-gray-700 whitespace-pre-line"
+                <div className="mt-6 text-[15px] sm:text-[15px] md:text-[15px] lg:text-[15px] text-justify text-gray-700"
                   dangerouslySetInnerHTML={{ __html: sanitizedLabheadDescription }}
                 />
               </div>

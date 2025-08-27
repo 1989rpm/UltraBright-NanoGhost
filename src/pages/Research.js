@@ -154,7 +154,7 @@ function ScrollZoomCard({ item, idx }) {
         style={{ scale }}
         className="p-3 w-full md:w-[30%] w-[80%] sm:w-[60%] flex items-center justify-center overflow-hidden rounded-md"
       >
-        <div className="relative w-full aspect-square overflow-hidden rounded-md min-h-[150px] sm:min-h-[100px] md:min-h-[200px]">
+        <div className="relative w-full aspect-square overflow-hidden rounded-md min-h-[200px] sm:min-h-[200px] md:min-h-[200px]">
           <img
             src={item.image}
             alt={`research-${idx}`}
@@ -168,7 +168,7 @@ function ScrollZoomCard({ item, idx }) {
         <h2 className="text-2xl sm:text-2xl md:text-2xl font-bold text-center md:text-center mt-4 md:mt-0 mb-4 sm:mb-6 text-purple-900">
           {item.name}
         </h2>
-        <div className="text-justify text-gray-800 leading-relaxed text-[12px] sm:text-[13px] md:text-[14px] pb-4 whitespace-pre-line"
+        <div className="text-justify text-gray-800 leading-relaxed text-[12px] sm:text-[13px] md:text-[14px] pb-4"
              dangerouslySetInnerHTML={{ __html: sanitizedDescription }} 
         />
       </div>

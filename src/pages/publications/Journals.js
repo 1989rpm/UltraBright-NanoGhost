@@ -3,7 +3,7 @@ import { FaLink } from 'react-icons/fa';
 //import sampleimage from '../../assets/journals/sample.jpg'
 import bgrnd from '../../assets/backs.png'
 import axiosInstance from '../../api/axios';
-import Pagination from '../../components/Pagination';
+// import Pagination from '../../components/Pagination';
 import DOMPurify from 'dompurify';
 
 function Journals() 
@@ -35,22 +35,22 @@ function Journals()
 
   const [entries, setEntries] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 30; // adjust as needed
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(1);
+  // const itemsPerPage = 30; // adjust as needed
 
   useEffect(() => {
-    axiosInstance.get(`journals/entries/?page=${currentPage}&search=${encodeURIComponent(searchTerm)}`)
+    axiosInstance.get(`journals/entries/?search=${encodeURIComponent(searchTerm)}`)
       .then(res => {
-        setEntries(res.data.results || []);
-        setTotalPages(Math.ceil(res.data.count / itemsPerPage));
+        setEntries(res.data || []);
+        // setTotalPages(Math.ceil(res.data / itemsPerPage));
       })
       .catch(err => console.error('Error fetching entries:', err));
-  }, [currentPage, searchTerm]);
+  }, [searchTerm]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // reset page when search changes
+    // setCurrentPage(1); // reset page when search changes
   };
 
   return ( 
@@ -118,11 +118,11 @@ function Journals()
         </div>
 
         {/* Pagination */}
-        <Pagination
+        {/* <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
-        />
+        /> */}
 
       </div>
     </div> 
