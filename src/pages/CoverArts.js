@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -6,7 +6,6 @@ import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/plugins/captions.css";
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
-import Pagination from '../components/Pagination';
 
 //----------------------Dynamically import all images from folder-------------------------------------
 // function importAll(r) {
@@ -37,23 +36,19 @@ export default function CoverArts() {
   const [coverArtImages, setCoverArtImages] = useState([]);
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(-1);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 30; // adjust as needed
 
 //-------------------------------API Call----------------------------------------------
   useEffect(() => {
-    axiosInstance.get(`cover-arts/?page=${currentPage}`)
+    axiosInstance.get(`cover-arts/`)
       .then(res => {
-        const formatted = (res.data.results || []).map(item => ({
+        const formatted = (res.data || []).map(item => ({
           src: item.image,        // match Lightbox src
           name: item.caption      // match Lightbox description
         }));
         setCoverArtImages(formatted);
-        setTotalPages(Math.ceil(res.data.count / itemsPerPage));
       })
     .catch((err) => console.error("Error fetching cover arts:", err));
-  }, [currentPage]);
+  }, []);
 //-------------------------------API Call----------------------------------------------
 
   return (
@@ -100,13 +95,6 @@ export default function CoverArts() {
             </div>
           ))}
         </Masonry>
-
-        {/* Pagination */}
-        <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-        />
 
         <Lightbox
           open={open}

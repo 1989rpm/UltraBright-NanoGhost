@@ -73,7 +73,7 @@ function Funding()
       </p>
       {/* Images */}
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="flex flex-wrap justify-center gap-24">
           {fundings.map((funding) => (
             <div
               key={funding.id}
@@ -83,7 +83,7 @@ function Funding()
               <img
                 src={funding.image}
                 alt="LOGO"
-                className="h-20 w-auto object-contain"
+                className="h-40 w-auto object-contain"
               />
 
               {/* Optional Caption */}

@@ -115,7 +115,7 @@ function Research() {
 
       {/* Research Cards */}
       <div className="px-4 sm:px-6 py-10 max-w-7xl mx-auto">
-        <div className="space-y-14 sm:space-y-16">
+        <div className="space-y-16 sm:space-y-0">
           {researchData.map((item, idx) => (
             <ScrollZoomCard item={item} idx={idx} key={idx} />
           ))}
@@ -152,7 +152,7 @@ function ScrollZoomCard({ item, idx }) {
       {/* Image */}
       <motion.div
         style={{ scale }}
-        className="p-3 w-full md:w-[30%] w-[80%] sm:w-[60%] flex items-center justify-center overflow-hidden rounded-md"
+        className="p-0 w-full md:w-[40%] w-[80%] sm:w-[60%] flex items-center justify-center overflow-hidden rounded-md"
       >
         <div className="relative w-full aspect-square overflow-hidden rounded-md min-h-[200px] sm:min-h-[200px] md:min-h-[200px]">
           <img
