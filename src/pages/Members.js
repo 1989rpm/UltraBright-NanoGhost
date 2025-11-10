@@ -4,7 +4,7 @@ import { FaLinkedin, FaXTwitter, FaEnvelope, FaGoogleScholar, FaGithub } from 'r
 //import labHeadImage from '../assets/members/rpm.jpg';
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
-import labimg from '../assets/grpimage.jpg'
+//import labimg from '../assets/grpimage.jpg'
 import orcid from '../assets/orcid.png'
 import DOMPurify from 'dompurify';
 
@@ -115,13 +115,13 @@ function Members() {
       </div>
 
       {/*------------------------------------------------------Lab Image---------------------------------------------------- */}
-      <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
-        <img
-          src={labimg}
-          alt="Lab Group"
-          className="w-full h-auto rounded-xl shadow-lg object-cover"
-        />
-      </div>
+      // <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
+      //   <img
+      //     src={labimg}
+      //     alt="Lab Group"
+      //     className="w-full h-auto rounded-xl shadow-lg object-cover"
+      //   />
+      // </div>
 
       {/* -----------------------------------------------Main Content----------------------------------------------- */}
       <div className="px-4 sm:px-8 md:px-16 lg:px-24 py-10 max-w-7xl mx-auto text-gray-800">
