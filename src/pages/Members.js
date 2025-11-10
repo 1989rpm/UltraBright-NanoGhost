@@ -115,13 +115,13 @@ function Members() {
       </div>
 
       {/*------------------------------------------------------Lab Image---------------------------------------------------- */}
-      // <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
-      //   <img
-      //     src={labimg}
-      //     alt="Lab Group"
-      //     className="w-full h-auto rounded-xl shadow-lg object-cover"
-      //   />
-      // </div>
+      {/* <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
+        <img
+          src={labimg}
+          alt="Lab Group"
+          className="w-full h-auto rounded-xl shadow-lg object-cover"
+        />
+      </div> */}
 
       {/* -----------------------------------------------Main Content----------------------------------------------- */}
       <div className="px-4 sm:px-8 md:px-16 lg:px-24 py-10 max-w-7xl mx-auto text-gray-800">
