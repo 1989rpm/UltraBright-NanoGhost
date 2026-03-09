@@ -4,7 +4,7 @@ import { FaLinkedin, FaXTwitter, FaEnvelope, FaGoogleScholar, FaGithub } from 'r
 //import labHeadImage from '../assets/members/rpm.jpg';
 import axiosInstance from '../api/axios';
 import bgrnd from '../assets/backs.png'
-import labimg from '../assets/grpimage.jpg'
+//import labimg from '../assets/grpimage.jpg'
 import orcid from '../assets/orcid.png'
 import DOMPurify from 'dompurify';
 
@@ -74,22 +74,26 @@ function HoverCard({ member }) {
 function Members() {
 
   const [labHead, setLabHead] = useState([]);
-  const [currentMembers, setCurrentMembers] = useState([]);
-  const [alumni, setAlumni] = useState([]);
+  const [memberSections, setMemberSections] = useState([]);
+  // const [alumni, setAlumni] = useState([]);
 
   useEffect(() => {
     axiosInstance.get('members/lab-head/')
       .then(res => setLabHead(res.data))
       .catch(err => console.error("Error fetching Lab Head", err));
 
-    axiosInstance.get('members/lab-members/')
-      .then(res => setCurrentMembers(res.data))
-      .catch(err => console.error("Error fetching members", err));
+    // axiosInstance.get('members/lab-members/')
+    //   .then(res => setCurrentMembers(res.data))
+    //   .catch(err => console.error("Error fetching members", err));
 
-    axiosInstance
-      .get("members/alumni/")
-      .then((res) => setAlumni(res.data))
-      .catch((err) => console.error("Error fetching alumni", err));
+    axiosInstance.get('lab-members/') // Ensure this matches the url in your Django urls.py
+      .then(res => setMemberSections(res.data))
+      .catch(err => console.error("Error fetching member sections", err));
+
+    // axiosInstance
+    //   .get("members/alumni/")
+    //   .then((res) => setAlumni(res.data))
+    //   .catch((err) => console.error("Error fetching alumni", err));
   }, []);
 
   const sanitizedLabheadDescription = labHead[0]
@@ -115,13 +119,13 @@ function Members() {
       </div>
 
       {/*------------------------------------------------------Lab Image---------------------------------------------------- */}
-      <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
+      {/* <div className="px-4 sm:px-8 md:px-16 lg:px-24 mt-8">
         <img
           src={labimg}
           alt="Lab Group"
           className="w-full h-auto rounded-xl shadow-lg object-cover"
         />
-      </div>
+      </div> */}
 
       {/* -----------------------------------------------Main Content----------------------------------------------- */}
       <div className="px-4 sm:px-8 md:px-16 lg:px-24 py-10 max-w-7xl mx-auto text-gray-800">
@@ -168,13 +172,27 @@ function Members() {
         )}
 
         {/* Members */}
-        <div className="mt-12 grid grid-cols-1 gap-8">
-          {currentMembers.map((member, idx) => (
-            <HoverCard key={idx} member={member} />
+        <div className="mt-16">
+          {memberSections.map((section) => (
+            <div key={section.id} className="mb-16">
+              
+              {/* Dynamic Section Heading (e.g., "PhD Students", "Postdocs") */}
+              <h2 className="text-5xl sm:text-4xl font-bold text-black mb-8 pb-2">
+                {section.name}
+              </h2>
+
+              {/* Grid of members specifically for this section */}
+              <div className="grid grid-cols-1 gap-8">
+                {section.members.map((member) => (
+                  <HoverCard key={member.id} member={member} />
+                ))}
+              </div>
+              
+            </div>
           ))}
         </div>
 
-        {/* Alumni */}
+        {/* Alumni
         {alumni.length > 0 && (
           <div className="text-left mt-12">
             <h1 className="text-2xl font-bold mb-4">Our Alumni</h1>
@@ -184,7 +202,7 @@ function Members() {
               </p>
             ))}
           </div>
-        )}
+        )} */}
 
         {/* CTA */}
         <div className="mt-12 text-center">
