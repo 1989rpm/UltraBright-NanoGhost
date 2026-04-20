@@ -47,10 +47,10 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30 flex items-center justify-center z-10">
           <div className="text-center px-4 max-w-5xl">
             <h1 className="text-4xl text-white md:text-6xl font-bold mb-6 drop-shadow-lg leading-tight">
-              Theranostics Intervention is easy, <br className="hidden md:block" /> but, tricky
+              Tumor & Organ Specific Targeting <br className="hidden md:block" />is interesting, but, tricky
             </h1>
             <p className="text-xl md:text-3xl text-[#95D5B2] font-medium drop-shadow-md mx-auto leading-relaxed">
-              We engineer Molecules and Cells at nanoscale to Develop Theranostics for Early-Stage cancer Imaging and Therapeutics
+              We engineer Molecules and Cells at nanoscale to Develop Molecular Imaging and Therapeutics agents
             </p>
           </div>
         </div>
