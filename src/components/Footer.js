@@ -15,7 +15,7 @@ function Footer() {
             Bright-NanoGhost Group
           </Link>
           <p className="text-[20px] leading-tight pb-[10px] text-gray-300">
-            Interventional Theranostics & Molecular Imaging Research
+            Molecular Imaging  and Theranostics Research
           </p>
 
           {/* Social Icons */}
