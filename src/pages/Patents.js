@@ -75,7 +75,13 @@ function Patent()
 
     return(
         <div className="mb-16">
-            <h2 className="text-6xl font-semibold mb-8 text-left md:text-left text-purple-800">National and International Patents</h2>
+            <h2 className="text-6xl font-semibold mb-2 text-left md:text-left text-purple-800">Key Patents</h2>
+
+            {/* Total number of patents count line */}
+            <p className="text-xl text-purple-600 mb-8 font-medium">
+                Total number of patents viz., 38 {/*{Patent.length}*/}
+            </p>
+
             <div className="space-y-6">
             {Patent.map(Patent => {
                 const sanitizedpatent = DOMPurify.sanitize(Patent.description);
