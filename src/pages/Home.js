@@ -69,11 +69,20 @@ function Funding() {
   const [fundings, setFundings] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [video, setVideo] = useState(null);
+
   useEffect(() => {
-    // OPTIMIZATION 3: Simple caching logic could go here, but for now we just fetch.
-    axiosInstance.get('fundings/')
-      .then(res => {
-        setFundings(res.data);
+    Promise.all([
+      axiosInstance.get("fundings/"),
+      axiosInstance.get("home-video/")
+    ])
+      .then(([fundingRes, videoRes]) => {
+        setFundings(fundingRes.data);
+
+        if (videoRes.data.length > 0) {
+          setVideo(videoRes.data[0]);
+        }
+
         setLoading(false);
       })
       .catch(err => {
@@ -82,47 +91,64 @@ function Funding() {
       });
   }, []);
 
-  if (!loading && fundings.length === 0) return null;
-
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <p className="text-2xl text-gray-900 text-center font-bold mb-12">
-          Our research is supported and funded by: 
-        </p>
-        
-        {/* 
-           OPTIMIZATION 4: Layout Stability
-           Used CSS Grid instead of Flexbox for more predictable spacing on mobile.
-           items-center ensures logos are vertically aligned.
-        */}
-        
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-          {fundings.map((funding) => (
-            <div 
-              key={funding.id} 
-              className="flex flex-col items-center w-[45%] md:w-[20%] min-w-[140px] group justify-center"
-            >
-              
-              <div className="h-40 w-full flex items-center justify-center p-4 transition-transform duration-300 group-hover:scale-110">
-                <img
-                  src={funding.image}
-                  alt={funding.caption || "Funding Partner"}
-                  loading="lazy" 
-                  width="200"
-                  height="150"
-                  // FIX 3: Added mx-auto just as an extra safeguard for the image alignment
-                  className="max-h-full max-w-full object-contain mx-auto"
-                />
-              </div>
 
-              {funding.caption && (
-                <p className="mt-4 text-sm text-gray-500 font-medium text-center">
-                  {funding.caption}
-                </p>
-              )}
+        <div className="flex flex-col md:flex-row gap-10">
+
+          {/* Video (left on desktop, below on mobile) */}
+          <div className="order-2 md:order-1 w-full md:w-1/2">
+            {video && (
+              <video
+                className="w-full rounded-xl shadow-lg"
+                controls
+                autoPlay
+                muted
+                playsInline
+                preload="metadata"
+                poster={video.poster}
+              >
+                <source src={video.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
+
+          {/* Funding Logos */}
+          <div className="order-1 md:order-2 w-full md:w-1/2">
+
+            <p className="text-2xl text-gray-900 text-center font-bold mb-12">
+            Our research is supported and funded by:
+            </p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {fundings.map((funding) => (
+                <div
+                  key={funding.id}
+                  className="flex flex-col items-center w-[45%] md:w-[20%] min-w-[140px] group justify-center"
+                >
+                  <div className="h-40 w-full flex items-center justify-center p-4 transition-transform duration-300 group-hover:scale-110">
+                    <img
+                      src={funding.image}
+                      alt={funding.caption || "Funding Partner"}
+                      loading="lazy"
+                      width="200"
+                      height="150"
+                      className="max-h-full max-w-full object-contain mx-auto"
+                    />
+                  </div>
+
+                  {funding.caption && (
+                    <p className="mt-4 text-sm text-gray-500 font-medium text-center">
+                      {funding.caption}
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
         </div>
       </div>
     </div>
