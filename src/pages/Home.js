@@ -31,8 +31,7 @@ function Home() {
           3. preload="auto": Hints browser to download video metadata ASAP.
         */}
         <motion.video
-          className="will-change-transform absolute top-0 left-0 w-full h
-          -full object-cover z-0 opacity-80"
+          className="will-change-transform absolute top-0 left-0 w-full h-full object-cover z-0 opacity-80"
           style={{ scale, y }}
           src={homeVideo}
           poster={videoPoster} 
@@ -44,14 +43,59 @@ function Home() {
         />
 
         {/* Overlay - Added gradient for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30 flex items-center justify-center z-10">
-          <div className="text-center px-4 max-w-5xl">
-            <h1 className="text-4xl text-white md:text-6xl font-bold mb-6 drop-shadow-lg leading-tight">
-              Tumor & Organ Specific Targeting <br className="hidden md:block" />is interesting, but, tricky
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/80 z-10">
+          <div className="flex flex-col justify-center items-center h-full px-6 text-center">
+
+            {/* Main Heading */}
+            <h1 className="
+              text-4xl
+              sm:text-5xl
+              md:text-6xl
+              font-bold
+              text-white
+              leading-tight
+              tracking-tight
+              drop-shadow-2xl
+              max-w-6xl
+            ">
+              Tumor & Organ Specific Targeting
+              <br className="hidden md:block" />
+              is interesting, but, tricky
             </h1>
-            <p className="text-xl md:text-3xl text-[#95D5B2] font-medium drop-shadow-md mx-auto leading-relaxed">
-              We engineer Molecules and Cells at nanoscale to Develop Molecular Imaging and Therapeutics agents
+
+            {/* Subtitle */}
+            <p className="
+              mt-8
+              max-w-5xl
+              text-lg
+              sm:text-xl
+              md:text-3xl
+              font-medium
+              text-emerald-300
+              leading-relaxed
+              drop-shadow-lg
+            ">
+              We engineer Molecules and Cells at nanoscale to develop
+              Molecular Imaging and Therapeutics agents
             </p>
+
+            {/* Quote */}
+            <div className="mt-20 max-w-4xl">
+              <p className="
+                text-base
+                sm:text-lg
+                md:text-2xl
+                italic
+                font-semibold
+                text-white/95
+                leading-relaxed
+                drop-shadow-lg
+              ">
+                Our philosophy- “We are not a team because we work together.
+                We are a team because we trust, respect, and care for each other.”
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -90,6 +134,14 @@ function Funding() {
         setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="py-12 bg-white text-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="py-12 bg-white">
