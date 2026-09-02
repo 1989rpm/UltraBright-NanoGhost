@@ -1,6 +1,6 @@
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../assets/logo2.png';
+import logo from '../assets/logo.png';
 
 // ------------------- CONFIGURATION -------------------
 const NAV_ITEMS = [
